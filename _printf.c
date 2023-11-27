@@ -44,6 +44,9 @@ int _printf(const char *format, ...)
                 char *str = va_arg(args, char *);
                 int length = 0;
 
+                if (str == NULL)
+                    str = "(null)";
+
                 while (str[length] != '\0')
                     length++;
 
@@ -76,6 +79,11 @@ int _printf(const char *format, ...)
                         num /= 10;
                     }
                 }
+            }
+            else
+            {
+                write(1, "%", 1);
+                count++;
             }
             format++;
         }

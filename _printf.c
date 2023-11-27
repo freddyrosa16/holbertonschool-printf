@@ -6,8 +6,9 @@
 */
 int _printf(const char *format, ...)
 {
-    int count = 0;
     va_list args;
+    int count = 0;
+
     va_start(args, format);
 
     if (format == NULL)
@@ -24,8 +25,15 @@ int _printf(const char *format, ...)
         else
         {
             format++;
+            if (*format == '\0')
+                break;
 
-            if (*format == 'c')
+            if (*format == '%')
+            {
+                write(1, format, 1);
+                count++;
+            }
+            else if (*format == 'c')
             {
                 char c = va_arg(args, int);
                 write(1, &c, 1);
@@ -34,30 +42,25 @@ int _printf(const char *format, ...)
             else if (*format == 's')
             {
                 char *str = va_arg(args, char *);
-                if (str == NULL)
-                    str = "(null)";
-                {
-                    int length = 0;
-                    while (str[length] != '\0')
-                        length++;
-                    write(1, str, length);
-                    count += length;
-                }
-            }
-            else if (*format == '%')
-            {
-                write(1, "%", 1);
-                count++;
+                int length = 0;
+
+                while (str[length] != '\0')
+                    length++;
+
+                write(1, str, length);
+                count += length;
             }
             else if (*format == 'd' || *format == 'i')
             {
                 int num = va_arg(args, int);
+
                 if (num < 0)
                 {
                     write(1, "-", 1);
                     count++;
                     num = -num;
                 }
+
                 if (num == 0)
                 {
                     write(1, "0", 1);
@@ -74,18 +77,10 @@ int _printf(const char *format, ...)
                     }
                 }
             }
-            else
-            {
-                write(1, "%", 1);
-                count++;
-                write(1, format, 1);
-                count++;
-            }
-
             format++;
         }
     }
 
     va_end(args);
-    return count;
+    return (count);
 }

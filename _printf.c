@@ -8,6 +8,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int count = 0;
+
 	va_start(args, format);
 
 	if (format == NULL)
@@ -18,7 +19,7 @@ int _printf(const char *format, ...)
 	{
 		if (*format != '%')
 		{
-			write (1, format, 1);
+			write(1, format, 1);
 			format++;
 		}
 		else
@@ -29,12 +30,14 @@ int _printf(const char *format, ...)
 			if (*format == 'c')
 			{
 				char c = va_arg(args, int);
+
 				write(1, &c, 1);
 				count++;
 			}
 			else if (*format == 's')
 			{
 				char *str = va_arg(args, char*);
+
 				int length = 0;
 				while (str[length] != '\0')
 					length++;

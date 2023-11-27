@@ -1,0 +1,32 @@
+.TH _printf 3 "November 2023" "Project:_printf" "Holberton School"
+.SH NAME
+_printf \- formatted output conversion
+.SH SYNOPSIS
+.PP
+.B #include "main.h"
+.sp
+.B int _printf(const char *format, ...);
+_printf("Hello, world");
+.SH DESCRIPTION
+.PP
+The \fBprintf\fP function formats and prints data according to the format string.
+.SH CONVERSION SPECIFIERS
+A character that specifies the type of conversion to be applied. The conversion specifier and their meaning are:
+.PP
+.IP "d, i"
+Turns an integer (\fBint\fP) into a regular number with at least a certain number of digits.
+.IP c
+Turns an integer (\fBint\fP) into a single character.
+.IP S
+Takes a string (\fBconst char *\fP) and prints it up to the end (excluding the end).
+.IP %
+Simply prints the percent symbol '%'; nothing else is changed.
+.PP
+.SH RETURN VALUE
+Successful return yields the characters printed (excluding the null byte used for string termination). For output errors, a negative value is returned.
+.SH AUTHOR
+Ninoshka Perez Andujar 7366@holbertonstudents.com
+Freddy Rosa Leon 7816@holbertonstudents.com
+.SH SEE ALSO
+.PP
+.BR printf (3)

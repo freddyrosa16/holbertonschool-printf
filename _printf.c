@@ -20,6 +20,7 @@ int _printf(const char *format, ...)
 		if (*format != '%')
 		{
 			write(1, format, 1);
+			count++;
 			format++;
 		}
 		else
@@ -33,6 +34,7 @@ int _printf(const char *format, ...)
 
 				write(1, &c, 1);
 				count++;
+				format++;
 			}
 			else if (*format == 's')
 			{
